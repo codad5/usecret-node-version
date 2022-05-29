@@ -8,6 +8,13 @@
 </head>
 <body>
     Signup page ''
+    <form method="post" action="/signup">
+        <input name="username" type="text">
+        <input name="password" type="password">
+        <input name="submit" type="submit" value="submit">
+        <%= locals.error || ''   %>
+
+    </form>
     
 </body>
 </html>

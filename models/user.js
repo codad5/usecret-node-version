@@ -1,5 +1,5 @@
 const database = require('../config/db')
-
+const dbConnect = new database('user')
 class UserModel {
     constructor() {
         
@@ -10,21 +10,36 @@ class UserModel {
          
 
     }
-    async setdb(){
-        return await database('user')
-    }
     async find(json){
         // console.log(await this.collection());
-        let db = await this.setdb()
-        console.log(db)
-        return await db.find(json);
+        // await dbConnect.open()
+        // console.log(db)
+        console.log(dbConnect.collection, 'dbConnect')
+        // console.log()
+        let me = await dbConnect.access()
+        let data = me.find(json);
+        // await db.client.close()
+        // return data
+        // await dbConnect.close()
+        return data
+        
     }
     async create(json, callback = (err, result) => {
         if(err) throw new Error('Error creating user', err)
         return result;
     }){
-        let db = await this.setdb()
-        return await db.insertOne(json, callback);
+        // await dbConnect.open()
+        // let db = await this.setdb()
+        let me = await dbConnect.access()
+        console.log('creating')
+        let data = await me.insertOne(json);
+        // return data'
+        console.log(data)
+        callback(!data.acknowledged, data.insertedId)
+    }
+    async end() {
+        return await dbConnect.close()
+
     }
 }
 module.exports = UserModel

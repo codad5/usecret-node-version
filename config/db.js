@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient
 const uri = 'mongodb://127.0.0.1:27017';
 const db = 'cooker';
-const client = new MongoClient(uri, { useUnifiedTopology: true });
+
 var find;
 const connection = async (collection) => {
     await client.connect();
@@ -13,19 +13,54 @@ const connection = async (collection) => {
     // console.log(collection.find({}))
     return collection;
 }
-const database =  async (collection) => {
-    try{
-        // const d = await connection(collection)
-        // console.log(await connection(collection).find({}) == await d.find({}))
-        return  await connection(collection)
-        
+class dbConnect {
+    constructor(collection) {
+        this.client = new MongoClient(uri, { useUnifiedTopology: true });
+        this.collection = collection;
+        this.connected = false
+
+        this.open = async () => {
+            console.log('attempting to connect mongodb', this.connected)
+            if(this.connected == false){
+                await this.client.connect();
+                this.connected = true
+                console.log('cconnectiong to mongodb ', this.connected)
+            }
+            const database = this.client.db(db);
+            return database.collection(this.collection)
+            // find = collection.find({title:"jnd"})
+            // console.log(collection);
+            // console.log(await collection.insertOne({title: 'me and you'}))
+            // console.log(collection.find({}))
+            
+
+        }
+        this.access = async () => {
+            try {
+                // const d = await connection(collection)
+                // console.log(await connection(collection).find({}) == await d.find({}))
+                return await this.open()
+
+            }
+            catch (err) {
+                console.log('Error connecting to MongoDB', err);
+                throw new Error(err)
+            }
+            
+        }
+        this.close = async () =>{
+            console.log(this.connected, 'attempting to disconnect')
+            return await this.client.close((err, res) => {
+                if(err) throw new Error('disconnection failed')
+                this.connected = false
+                console.log(res, this.connected, 'successfully disconencted')
+
+            })
+        }
     }
-    catch(err){
-        console.log('Error connecting to MongoDB', err);
-        
-    }
-    return;
+    
+    
     
 };
 
-module.exports =  database
+module.exports = dbConnect
