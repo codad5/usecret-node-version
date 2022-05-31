@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    this is the home 
+    welcome back <%= locals.username %>
+
+    your private link <a
+        href="http://localhost:3000/message/p/<%= locals.private_id %>">http://localhost:3000/message/p/<%= locals.private_id %></a>
+    your open link <a
+        href="http://localhost:3000/message/i/<%= locals.username %>">http://localhost:3000/message/i/<%= locals.username %></a>
 </body>
 </html>

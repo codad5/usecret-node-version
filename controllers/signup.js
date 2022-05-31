@@ -40,7 +40,7 @@ class SignupController {
         return false
     }
     async create(end = false, callback = null){
-        let data = await model.create({ username: this.username, password: this.password }, callback);
+        let data = await model.create({ username: this.username, password: this.password, private_id: new Date().valueOf() }, callback);
         // console.log(data)
         console.log('creating', data)
         if(end) return await this.end()

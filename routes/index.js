@@ -27,7 +27,9 @@ router.route('/login').
             if (await login.userExist(true) === false) {
                 await login.end(); return res.render('login', { username: req.body?.username, password: req.body?.password, error: "user dont exist" });
             }
+            let loginData = await login.getData()
             req.session.user = req.body?.username;
+            req.session.pid = loginData.private_id;
             if (isLogin(req)) return res.redirect('/home'); 
             
             // res.send('Working')
@@ -73,6 +75,9 @@ router.route('/signup').
             // res.status(500).send(err.message);
         }
     })
-
+router.route('/:any')
+    .get((req, res) => {
+        return res.render('404')
+    })
 
 module.exports = router

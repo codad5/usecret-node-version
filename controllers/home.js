@@ -1,11 +1,12 @@
 const UserModel = require('../models/user')
 const model= new UserModel();
 
-class SignupController {
+class HomeController {
     constructor(username, password) {
-        if (!this.has_value([username, password])) throw new Error('Username and password can not be empty')
+        if (!this.has_value(username)) throw new Error('Username and password can not be empty')
         this.username = username;
         this.password = password;
+        if(!this.userExist()) throw new Error('user dont exist')
         console.log(username)
         
     }
@@ -21,12 +22,12 @@ class SignupController {
         if(this.username.match(/^[a-zA-Z0-9]+$/) == null) throw new Error('Username can only contain Letter from 0-9, A-Z, a-z')
         
     }
-    async getData() {
-        try {
+    async getData(){
+        try{
             const data = await model.findOne({ username: this.username })
             console.log(data)
             return data
-        } catch (err) {
+        }catch(err){
             console.log(err)
         }
     }
@@ -57,4 +58,4 @@ class SignupController {
     
 }
 
-module.exports = SignupController
+module.exports = HomeController

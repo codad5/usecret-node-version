@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost/currencynet/bootstrap/css/bootstrap.min.css" />
+    <script src="http://localhost/currencynet/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://localhost/currencynet/scripts/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>message <%= locals.r_username %> anonyimously</title>
+</head>
+
+<body>
+    <div class="container">
+        <br />
+        <div class="jumbotron">
+            <h1 class="display-4">Send Message</h1>
+            <a href="/app.html">Download Message</a>
+
+            <br />
+
+            <input type="text" placeholder="Name" id="name" class="form-control">
+            <br />
+            <textarea type="text" placeholder="message" id="message" class="form-control"></textarea>
+            <br />
+            <button class="btn btn-success" id="send">Send</button>
+        </div>
+        <br />
+        <div id="messages">
+            &#39
+        </div>
+    </div>
+    <script>
+        var socket = io()
+
+        $(() => {
+            $("#send").click(() => {
+                var message = {
+                    name: $("#name").val(),
+                    message: $("#message").val()
+                }
+                // addMessage({name:"Me", message:"This is me "})
+                postMessages(message)
+            })
+            getMessages()
+        })
+
+
+        const addMessage = (messages) => {
+            $("#messages").append(`<h4> ${messages?.name} </h4> <p> ${messages?.message} </p>`);
+        }
+
+        socket.on('message', addMessage)
+        const getMessages = () => {
+            $.get('http://localhost:5000/message', (data) => {
+                console.log(data)
+                data.forEach(addMessage);
+            })
+        }
+        const postMessages = (message) => {
+            $.post('http://localhost:5000/message', message, (err) => {
+                $("#name").val(""),
+                    $("#message").val("")
+            })
+        }
+    </script>
+</body>
+
+</html>

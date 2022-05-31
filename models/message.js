@@ -1,20 +1,20 @@
 const database = require('../config/db')
-const dbConnect = new database('user')
-class UserModel {
+const dbConnect = new database('message')
+class MessageModel {
     constructor() {
-        
-        
+
+
         // this.collection =  database('user');
-            // console.log(database('user'))
-        
-         
+        // console.log(database('user'))
+
+
 
     }
-    async findOne(json){
+    async findOne(json) {
         // console.log(await this.collection());
         // await dbConnect.open()
         // console.log(db)
-        // console.log(dbConnect.collection, 'dbConnect')
+        console.log(dbConnect.collection, 'dbConnect')
         // console.log()
         let me = await dbConnect.access()
         let data = me.findOne(json);
@@ -22,13 +22,13 @@ class UserModel {
         // return data
         // await dbConnect.close()
         return data
-        
+
     }
-    async find(json){
+    async find(json) {
         // console.log(await this.collection());
         // await dbConnect.open()
         // console.log(db)
-        // console.log(dbConnect.collection, 'dbConnect')
+        console.log(dbConnect.collection, 'dbConnect')
         // console.log()
         let me = await dbConnect.access()
         let data = me.find(json);
@@ -36,12 +36,12 @@ class UserModel {
         // return data
         // await dbConnect.close()
         return data
-        
+
     }
     async create(json, callback = (err, result) => {
-        if(err) throw new Error('Error creating user', err)
+        if (err) throw new Error('Error creating user', err)
         return result;
-    }){
+    }) {
         // await dbConnect.open()
         // let db = await this.setdb()
         let me = await dbConnect.access()
@@ -56,4 +56,4 @@ class UserModel {
 
     }
 }
-module.exports = UserModel
+module.exports = MessageModel
