@@ -5,14 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="http://localhost/currencynet/bootstrap/css/bootstrap.min.css" />
+    <script src="http://localhost/currencynet/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://localhost/currencynet/scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     this is the home 
+    <a href="/logout">Logout</a>
     welcome back <%= locals.username %>
 
     your private link <a
         href="http://localhost:3000/message/p/<%= locals.private_id %>">http://localhost:3000/message/p/<%= locals.private_id %></a>
     your open link <a
         href="http://localhost:3000/message/i/<%= locals.username %>">http://localhost:3000/message/i/<%= locals.username %></a>
+
+        <div id="messages">
+            &#39
+        </div>
+        </div>
+        <script>
+            var socket = io()
+
+            $(() => {
+                
+                getMessages()
+            })
+
+
+            const addMessage = (messages) => {
+                let date = new Date(messages?.date)
+                $("#messages").append(`<h4> ${date.toUTCString()} </h4>
+                <p> ${messages?.message} </p>`);
+            }
+
+            socket.on('message/<%= locals.private_id %>', addMessage)
+            const getMessages = () => {
+                $.get('http://localhost:3000/message', (data) => {
+                    console.log(data)
+                    data.data.forEach(addMessage);
+                })
+            }
+            const postMessages = (message) => {
+                $.post('http://localhost:3000/message/send', message, (err) => {
+                    $("#name").val(""),
+                        $("#message").val("")
+                })
+            }
+        </script>
 </body>
 </html>

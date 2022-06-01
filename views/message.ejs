@@ -17,15 +17,15 @@
         <br />
         <div class="jumbotron">
             <h1 class="display-4">Send Message</h1>
-            <a href="/app.html">Download Message</a>
 
             <br />
 
-            <input type="text" placeholder="Name" id="name" class="form-control">
+            <!-- <input type="text" placeholder="Name" id="name" class="form-control"> -->
             <br />
             <textarea type="text" placeholder="message" id="message" class="form-control"></textarea>
             <br />
             <button class="btn btn-success" id="send">Send</button>
+            <span id="errormessage">Hello</span>
         </div>
         <br />
         <div id="messages">
@@ -37,14 +37,21 @@
 
         $(() => {
             $("#send").click(() => {
+                if($("#message").val().length > 70) {
+                    console.log('message too long')
+                    document.querySelector('#errormessage').innerHTML = 'message too long';
+                    return;
+                }
+                // errormessage
                 var message = {
-                    name: $("#name").val(),
+                    receiver: <%= locals.r_pid || `${locals.r_username}` %>,
                     message: $("#message").val()
+                    // sender: <%= locals.s_pid || "null" %>
                 }
                 // addMessage({name:"Me", message:"This is me "})
                 postMessages(message)
             })
-            getMessages()
+            // getMessages()
         })
 
 
@@ -54,14 +61,14 @@
 
         socket.on('message', addMessage)
         const getMessages = () => {
-            $.get('http://localhost:5000/message', (data) => {
+            $.get('http://localhost:3000/message', (data) => {
                 console.log(data)
                 data.forEach(addMessage);
             })
         }
         const postMessages = (message) => {
-            $.post('http://localhost:5000/message', message, (err) => {
-                $("#name").val(""),
+            $.post('http://localhost:3000/message/send', message, (err) => {
+                    $("#name").val(""),
                     $("#message").val("")
             })
         }

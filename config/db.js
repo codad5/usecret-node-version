@@ -1,6 +1,8 @@
 const MongoClient = require('mongodb').MongoClient
+// const uri = 'mongodb://127.0.0.1:27017';
 const uri = 'mongodb+srv://user:user@learningnode.ipsst.mongodb.net/?retryWrites=true&w=majority';
 const db = 'test';
+// const db = 'cooker';
 
 var find;
 const connection = async (collection) => {
@@ -15,7 +17,7 @@ const connection = async (collection) => {
 }
 class dbConnect {
     constructor(collection) {
-        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.client = new MongoClient(uri, { useUnifiedTopology: true });
         this.collection = collection;
         this.connected = false
 

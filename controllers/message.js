@@ -69,17 +69,43 @@ class MessageController {
             return data
         } catch (err) {
             console.log(err)
+            throw new Error('Unknown type, reciever', err)
         }
+        return null
     }
-    async send(){
+    async getUserMessage() {
+        try {
+            let userData = await this.getUserData()
+            if (userData == null) throw new Error('user not found');
+            const data = await Messaagemodel.find({ r_username: userData.username, r_id: userData.private_id })
+            // console.log(data, this.findModel)
+            let dataArray = []
+            while(await data.hasNext()) {
+                 dataArray.push(await data.next())
+                
+            }
+            return dataArray
+            
+            // console.log(data)
+            // return data
+        } catch (err) {
+            console.log(err)
+            throw new Error('Unknown type, reciever', err)
+        }
+        return null
+    }
+    async sendMessage(message, sender = null){
+        const userData = await this.getUserData()
         this.messagemodel = {
             message: message,
-            r_username: this.reciever.username,
-            r_id: this.reciever.private_id,
+            r_username: userData.username,
+            r_id: userData.private_id,
             sender: sender,
+            date: new Date().valueOf()
 
         }
-        let data = await Usermodel.insertOne(this.messagemodel)
+        let data = await Messaagemodel.send(this.messagemodel)
+        // console.log(data, 'hurry')
         return data;
     }
     async userExist(end = false) {

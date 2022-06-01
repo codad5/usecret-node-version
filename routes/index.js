@@ -75,6 +75,12 @@ router.route('/signup').
             // res.status(500).send(err.message);
         }
     })
+router.route('/logout')
+.get(async (req, res) => {
+    req.session.destroy((err) =>{
+        return res.redirect('../');
+    })
+}) 
 router.route('/:any')
     .get((req, res) => {
         return res.render('404')

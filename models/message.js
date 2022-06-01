@@ -32,24 +32,23 @@ class MessageModel {
         // console.log()
         let me = await dbConnect.access()
         let data = me.find(json);
+        console.log(data)
+
         // await db.client.close()
         // return data
         // await dbConnect.close()
         return data
 
     }
-    async create(json, callback = (err, result) => {
-        if (err) throw new Error('Error creating user', err)
-        return result;
-    }) {
+    async send(json) {
         // await dbConnect.open()
         // let db = await this.setdb()
         let me = await dbConnect.access()
         console.log('creating')
         let data = await me.insertOne(json);
-        // return data'
-        console.log(data)
-        callback(!data.acknowledged, data.insertedId)
+        // console.log(data)
+        return data;
+        // callback(!data.acknowledged, data.insertedId)
     }
     async end() {
         return await dbConnect.close()
