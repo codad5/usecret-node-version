@@ -59,15 +59,9 @@
             $("#messages").append(`<h4> ${messages?.name} </h4> <p> ${messages?.message} </p>`);
         }
 
-        socket.on('message', addMessage)
-        const getMessages = () => {
-            $.get('http://localhost:3000/message', (data) => {
-                console.log(data)
-                data.forEach(addMessage);
-            })
-        }
+        
         const postMessages = (message) => {
-            $.post('http://localhost:3000/message/send', message, (err) => {
+            $.post('/message/send', message, (err) => {
                     $("#name").val(""),
                     $("#message").val("")
             })

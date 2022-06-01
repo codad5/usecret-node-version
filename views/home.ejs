@@ -41,17 +41,12 @@
 
             socket.on('message/<%= locals.private_id %>', addMessage)
             const getMessages = () => {
-                $.get('http://localhost:3000/message', (data) => {
+                $.get('/message', (data) => {
                     console.log(data)
                     data.data.forEach(addMessage);
                 })
             }
-            const postMessages = (message) => {
-                $.post('http://localhost:3000/message/send', message, (err) => {
-                    $("#name").val(""),
-                        $("#message").val("")
-                })
-            }
+            
         </script>
 </body>
 </html>
