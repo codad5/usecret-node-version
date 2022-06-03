@@ -10,6 +10,9 @@ const isLogin = (req) => {
 // router.use(bodyParser.json())
 // router.use(express.json())
 // router.use(bodyParser.urlencoded({ extended: true }))
+router.route('/', (req, res) => {
+    return res.render('index')
+})
 router.route('/login').
     get((req, res) => {
         if(isLogin(req)) return res.redirect('/home')

@@ -19,13 +19,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/message', messageRoute)
 app.use('/home', homeRoute)
 app.use('/', userRoute)
-// app.get('/', (req, res) => {
-//     res.render('index', {text: 'world'})
-// })
-
-io.on('connection', (socket) => {
-    console.log("socket connection established")
+app.get('/', (req, res) => {
+    res.render('index', {text: 'world'})
 })
+
+
 const server = http.listen(process.env.PORT || 3000, () => {
    console.log('server listening on port '+server.address().port)
     

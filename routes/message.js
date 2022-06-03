@@ -116,7 +116,7 @@ router.route('/p/:id').
     })
 router.route('/i/:id').
     get(async (req, res) => {
-        if (isLogin(req) && req.session.pid == req.params.id) return res.redirect('../../../login')
+        if (isLogin(req) && req.session.user == req.params.id) return res.redirect('../../../login')
         try{
 
             const home = new MessageController('i', req.params.id)
