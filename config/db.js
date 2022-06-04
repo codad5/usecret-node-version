@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient
-const uri = 'mongodb://127.0.0.1:27017';
-// const uri = 'mongodb+srv://user:user@learningnode.ipsst.mongodb.net/?retryWrites=true&w=majority';
-// const db = 'test';
-const db = 'cooker';
+//const uri = 'mongodb://127.0.0.1:27017';
+const uri = 'mongodb+srv://user:user@learningnode.ipsst.mongodb.net/?retryWrites=true&w=majority';
+const db = 'test';
+//const db = 'cooker';
 
 var find;
 const connection = async (collection) => {
