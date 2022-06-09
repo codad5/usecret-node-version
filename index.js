@@ -22,6 +22,16 @@ app.use('/', userRoute)
 app.get('/', (req, res) => {
     res.render('index', {text: 'world'})
 })
+app.get('/css/:id', (req, res) => {
+    try{
+        res.sendFile(`${__dirname}/style/${req.params.id}.css`)
+    }
+    catch(e){
+        res.status(400).send(e)
+    }
+})
+
+
 
 
 const server = http.listen(process.env.PORT || 3000, () => {

@@ -1,0 +1,114 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    overflow-x:hidden;
+    font-family:poppins;
+
+}
+:root{
+    --main-color:#314352;
+    --sec-color:#f0f0f0;
+}
+main, section, body{
+    width:100vw;
+    background:var(--main-color);
+    color:var(--sec-color);
+    position:relative;
+
+}
+
+.hero-section{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    flex-direction: column;
+}
+
+.hero-section > .main-header{
+    width:100%;
+    height:40%;
+    display:flex;
+    align-items: flex-end;
+    justify-content:center;
+    font-size:3rem;
+    text-align:center;
+}
+.hero-section>.action-btns-cnt {
+    width:100%;
+    height:25%;
+    display:flex;
+    align-items: flex-start;
+    justify-content:center;
+    gap:30px;
+    padding-top:20px;
+    /* font-size:3rem; */
+}
+.action-btn{
+    background:var(--sec-color);
+    display:inline-block;
+    padding:4px 8px;
+    text-align:center;
+    text-decoration:none;
+    color:var(--main-color);
+    border:double 6px var(--main-color);
+    transition:all .5s;
+}
+
+.action-btn:hover {
+    background: transparent;
+    display: inline-block;
+    padding: 4px 8px;
+    /* text-decoration: none; */
+    text-align:center;
+    color: var(--sec-color);
+    border: double 6px var(--sec-color);
+}
+
+.hero-action-btn{
+    height:30%;
+    width:100px;
+    display:grid;
+    place-items:center;
+}
+
+.signup-section{
+    height:100vh;
+    display:grid;
+    place-items:center;
+
+    
+}
+
+.signup-section .form-cnt{
+    width:clamp(300px,80%, 400px);
+    height:70%;
+    text-align:center;
+    display:flex;
+    align-items:center;
+    /* flex-wrap:wrap; */
+}
+
+.form-cnt .form-header{
+    width:100%;
+    /* height:30px; */
+    padding:8px 10px;
+    text-align:center;
+    text-transform:uppercase;
+    font-size:2rem;
+}
+.form-cnt input{
+    width:80%;
+    height:40px;
+    margin:4px 0px;
+}
+
+.form-noti{
+    position:fixed;
+    top: 10px;
+    right: 10px;
+    padding:5px 10px;
+    background:rgb(11, 116, 11);
+}

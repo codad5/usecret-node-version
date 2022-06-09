@@ -5,12 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="currencynet" content="5b8916544623464485b89">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description"
+          content="Usecret is an anoymous messaging application to help receive reviews from friends anonymously" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Social Media Platform | For Friends" />
+    <meta property="og:description"
+        content="Usecret is an anoymous messaging application to help receive reviews from friends & co-workers anonymously to improve on your self" />
+    <meta property="og:url" content="http://localhost/" />
+    <meta property="og:site_name" content="Usecret is an anoymous messaging application" />
+    <!-- <meta name="twitter:card" content="summary_large_image" /> -->
+    <meta name="twitter:title" content="Usecret is an anoymous messaging application" />
+    <meta name="twitter:description"
+        content="Usecret is an anoymous messaging application to help receive reviews from friends & co-workers
+        anonymously to improve on your self" />
+    <!-- <meta name="twitter:image" content="http://localhost/static/brand/banner_logo.png" /> -->
+    <meta name="theme-color" content="#314352" />
+    <script type="application/ld+json">
+          {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "http://localhost/",
+              "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
+              "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "http://localhost/search/{search_term_string}/",
+                  "query-input": "required name=search_term_string"
+              }
+          }
+      </script>
+      <script type="application/ld+json">
+          {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "url": "http://localhost/",
+              "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
+              "logo": "http://localhost/static/brand/banner_logo.png"
+          }
+      </script>
+    <title>Usecret</title>
+    <link rel="stylesheet" href="css/index">
+    <script src="http://localhost/currencynet/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://localhost/currencynet/scripts/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
+    <main class="container" >
     <!-- Hello <%= locals.text %>! -->
-    Click to here to  <a href='/signup' >Signup</a>
-    Click to here to <a href='/Login'>Login</a>
 
+
+
+        <section class="hero-section">
+            <h1 class="main-header">USECRET MESSAGING</h1>
+            <div class="action-btns-cnt">
+                <a href='/signup'  class="action-btn hero-action-btn">Signup</a>
+                <a href='/Login' class="action-btn hero-action-btn">Login</a>
+            </div>
+        </section>
+    
+    </main>
 </body>
 </html>
