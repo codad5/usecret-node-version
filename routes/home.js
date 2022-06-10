@@ -12,15 +12,17 @@ const isLogin = (req) => {
 // router.use(bodyParser.urlencoded({ extended: true }))
 router.route('/').
     get(async (req, res) => {
+        // console.log(req., 'printing url')
         if (!isLogin(req)) return res.redirect('../login')
         const home = new HomeController(req.session.user, null)
         let data = await home.getData()
-        console.log(data, 'hello----')
-        if (data == null){
+        // console.log(data, 'hello----')
+        if (data == null){ 
             req.session.user = undefined;
-            return res.render('404', {username:req.session.user});
+            return res.render('404', {username:req.session.user, message:'user'});
         } 
-        return res.render('home', {username:req.session.user, private_id:req.session.pid});
+        
+        return res.render('home', {username:req.session.user, private_id:req.session.pid, url:req.protocol + '://' + req.headers.host});
     })
     .post(async (req, res, next) => {
         // console.log(req.params.id)

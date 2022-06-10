@@ -6,7 +6,7 @@ class SignupController {
         if (!this.has_value([username, password])) throw new Error('Username and password can not be empty')
         this.username = username;
         this.password = password;
-        console.log(username)
+        // console.log(username)
         
     }
 
@@ -24,7 +24,7 @@ class SignupController {
     async getData() {
         try {
             const data = await model.findOne({ username: this.username })
-            console.log(data)
+            // console.log(data)
             return data
         } catch (err) {
             console.log(err)
@@ -37,7 +37,7 @@ class SignupController {
             // console.log(data, 1000)
             // console.log(await data.hasNext(), 2000)
             // console.log('testing')
-            console.log(data)
+            // console.log(data)
             if (await data.hasNext()) return true
             return false
 

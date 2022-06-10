@@ -115,7 +115,7 @@ class MessageController {
             // console.log(data, 1000)
             // console.log(await data.hasNext(), 2000)
             // console.log('testing')
-            console.log(data)
+            // console.log(data)
             if (await data.hasNext()) return true
             return false
 

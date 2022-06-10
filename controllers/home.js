@@ -7,7 +7,7 @@ class HomeController {
         this.username = username;
         this.password = password;
         if(!this.userExist()) throw new Error('user dont exist')
-        console.log(username)
+        // console.log(username)
         
     }
 
@@ -25,7 +25,7 @@ class HomeController {
     async getData(){
         try{
             const data = await model.findOne({ username: this.username })
-            console.log(data)
+            // console.log(data)
             return data
         }catch(err){
             console.log(err)
@@ -38,7 +38,7 @@ class HomeController {
             // console.log(data, 1000)
             // console.log(await data.hasNext(), 2000)
             // console.log('testing')
-            console.log(data)
+            // console.log(data)
             if (await data.hasNext()) return true
             return false
 

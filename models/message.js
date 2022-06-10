@@ -32,7 +32,7 @@ class MessageModel {
         // console.log()
         let me = await dbConnect.access()
         let data = me.find(json);
-        console.log(data)
+        // console.log(data)
 
         // await db.client.close()
         // return data
@@ -44,7 +44,7 @@ class MessageModel {
         // await dbConnect.open()
         // let db = await this.setdb()
         let me = await dbConnect.access()
-        console.log('creating')
+        // console.log('creating')
         let data = await me.insertOne(json);
         // console.log(data)
         return data;

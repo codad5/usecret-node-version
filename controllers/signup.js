@@ -6,7 +6,7 @@ class SignupController {
         if (!this.has_value([username, password])) throw new Error('Username and password can not be empty')
         this.username = username;
         this.password = password;
-        console.log(username)
+        // console.log(username)
         
     }
 
@@ -42,7 +42,7 @@ class SignupController {
     async create(end = false, callback = null){
         let data = await model.create({ username: this.username, password: this.password, private_id: new Date().valueOf() }, callback);
         // console.log(data)
-        console.log('creating', data)
+        // console.log('creating', data)
         if(end) return await this.end()
         return data
         // return await model.create({ username: this.username, password: this.password }, callback)

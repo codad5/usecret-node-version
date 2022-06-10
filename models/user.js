@@ -48,7 +48,7 @@ class UserModel {
         console.log('creating')
         let data = await me.insertOne(json);
         // return data'
-        console.log(data)
+        // console.log(data)
         callback(!data.acknowledged, data.insertedId)
     }
     async end() {

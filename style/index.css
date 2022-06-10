@@ -108,7 +108,112 @@ main, section, body{
 .form-noti{
     position:fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
     padding:5px 10px;
     background:rgb(11, 116, 11);
+}
+
+.top-action{
+    background:var(--sec-color);
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+}
+
+.welcome_panel{
+    padding:95px 0 025px 0;
+
+}
+
+.welcome_panel h6{
+    color:var(--sec-color);
+    width:100%;
+    text-align:center;
+    padding:4px;
+
+}
+.welcome_panel h1{
+    color:var(--sec-color);
+    width:100%;
+    text-align:center;
+    padding:4px;
+    font-size:3rem;
+
+}
+
+.links_panel{
+    padding:10px 0px;
+    text-align:center;
+
+}
+
+.link_panel{
+    width:80%;
+    background:var(--sec-color);
+    height:55px;
+    display:inline-flex;
+    border:double 9px var(--main-color);
+    text-align:left;
+}
+.link_panel a{
+    display:inline-block;
+    width:70%;
+    height:100%;
+    padding:0px 6px;
+    text-decoration:underline;
+    display:flex;
+    align-items:center;
+    color:var(--main-color);
+
+}
+.link_panel button{
+    display:inline-block;
+    width:30%;
+    height:100%;
+    /* padding:0px 6px; */
+    /* text-decoration:underline; */
+    display:grid;
+    place-items:center;
+    color:var(--sec-color);
+    background:var(--main-color);
+    position:relative;
+    overflow:hidden;
+
+}
+
+.link_panel button .click_effeect {
+    display: inline-block;
+    width: 0.2px;
+    height: 0.2px;
+    /* padding: 0px 6px; */
+    /* text-decoration:underline; */
+    border-radius:50%;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    opacity: 0.5;
+    background: var(--sec-color);
+    transition: all 0.5s;
+
+}
+.link_panel button:active .click_effeect {
+    display: inline-block;
+    width: 100%;
+    height: 200%;
+    border-radius: 50% ;
+
+}
+
+#messages{
+   height:calc(100vh - 358px);
+   overflow-y:scroll; 
+   gap:100px;
+}
+
+#messages .message_box{
+    width:100%;
+    padding:15px;
+    border:1px solid var(--sec-color);
+    margin:10px 0px;
 }
