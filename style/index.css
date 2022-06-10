@@ -217,3 +217,15 @@ main, section, body{
     border:1px solid var(--sec-color);
     margin:10px 0px;
 }
+
+.floating_message{
+    position:fixed;
+    width:250px;
+    padding:10px 5px;
+    background:var(--sec-color);
+    opacity:0.5;
+    bottom:100px;
+    left:calc(50vw - 125px);
+    color: var(--main-color);
+    text-align:center;
+}
