@@ -165,7 +165,7 @@ main, section, body{
     display:flex;
     align-items:center;
     color:var(--main-color);
-
+    word-break:keep-all;
 }
 .link_panel button{
     display:inline-block;
