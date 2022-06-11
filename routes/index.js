@@ -86,9 +86,9 @@ router.route('/logout')
         return res.redirect('../');
     })
 }) 
-router.route('*')
+router.route('/:any')
     .get((req, res) => {
-        return res.render('404', )
+        return res.render('404', {message:'404 Page not found'})
     })
 
 module.exports = router
