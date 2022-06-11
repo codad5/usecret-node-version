@@ -166,6 +166,7 @@ main, section, body{
     align-items:center;
     color:var(--main-color);
     word-break:keep-all;
+    overflow:hidden;
 }
 .link_panel button{
     display:inline-block;

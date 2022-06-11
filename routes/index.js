@@ -39,7 +39,7 @@ router.route('/login').
         }
         catch (err) {
             console.log(err)
-            next(err)
+            // next(err)
             return res.render('login', { username: req.body?.username, password: req.body?.password, error: err })
             // res.status(500).send(err.message);
         }
@@ -73,20 +73,22 @@ router.route('/signup').
         }
         catch(err){
             console.log(err)
-            next(err)
+            // next(err)
             return res.render('signup', { username: req.body?.username, password: req.body?.password, error:err })
             // res.status(500).send(err.message);
         }
     })
 router.route('/logout')
 .get(async (req, res) => {
+    req.session.user = undefined;
+    req.session.pid = undefined;
     req.session.destroy((err) =>{
         return res.redirect('../');
     })
 }) 
-router.route('/:any')
+router.route('*')
     .get((req, res) => {
-        return res.render('404')
+        return res.render('404', )
     })
 
 module.exports = router

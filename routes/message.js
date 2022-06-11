@@ -153,7 +153,7 @@ router.route('/i/:id').
     })
 router.route('*')
     .get((req, res) => {
-        return res.render('404')
+        return res.render('404', {message:'404 Page not found'})
     })
 
 module.exports = router
