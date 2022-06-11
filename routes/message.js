@@ -15,7 +15,7 @@ const isLogin = (req) => {
 // router.use(bodyParser.urlencoded({ extended: true }))
 router.route('/')
     .get(async (req, res) => {
-        try{if(!isLogin(req)) return res.status(400).json({ error: true, message:'you are not logged in '})
+        try{if(!isLogin(req)) return res.status(400).json({ error: true, message:'you are not logged in ', currentLoggedIn:req.session?.user})
         console.log(req.session?.user)
         const home = new MessageController('i', req.session?.user)
         let userData = await home.getUserMessage()
