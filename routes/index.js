@@ -11,7 +11,7 @@ const isLogin = (req) => {
 // router.use(express.json())
 // router.use(bodyParser.urlencoded({ extended: true }))
 router.route('/', (req, res) => {
-    return res.render('index')
+    return res.render('index', { url: req.protocol + '://' + req.headers.host })
 })
 router.route('/login').
     get((req, res) => {

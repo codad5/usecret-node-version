@@ -12,7 +12,7 @@
   <meta property="og:title" content="Social Media Platform | For Friends" />
   <meta property="og:description"
     content="Usecret is an anoymous messaging application to help receive reviews from friends & co-workers anonymously to improve on your self" />
-  <meta property="og:url" content="http://localhost/" />
+  <meta property="og:url" content="<%= locals.url %>" />
   <meta property="og:site_name" content="Usecret is an anoymous messaging application" />
   <!-- <meta name="twitter:card" content="summary_large_image" /> -->
   <meta name="twitter:title" content="Usecret is an anoymous messaging application" />
@@ -24,7 +24,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "url": "http://localhost/",
+      "url": "<%= locals.url %>/",
       "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
       "potentialAction": {
         "@type": "SearchAction",
@@ -37,9 +37,9 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "url": "http://localhost/",
+      "url": "<%= locals.url %>/",
       "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
-      "logo": "http://localhost/static/brand/banner_logo.png"
+      "logo": "<%= locals.url %>/static/brand/banner_logo.png"
     }
   </script>
   <title>login</title>
