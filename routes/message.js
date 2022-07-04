@@ -55,7 +55,7 @@ router.route('/send').
             // console.log(sent, userData?.private_id)
             if (sent !== null && sent !== false && sent.acknowledged){
 
-                io.emit(`message/${userData?.private_id}`, {
+                req.io.emit(`message/${userData?.private_id}`, {
                     _id: sent.insertedId,
                     message: req.body?.message,
                     r_username: userData?.username,
@@ -63,6 +63,7 @@ router.route('/send').
                     sender: null,
                     date: new Date().valueOf()
                     },);
+                    console.log('emitted')
                      return res.status(200).json({ message:'sent', error:false})
     } 
 

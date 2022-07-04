@@ -16,6 +16,10 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(session({secret:"qwe2930823408234",  resave:false, saveUninitialized:true}))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use((req, res, next)=> {
+    req.io = io
+    return next()
+})
 app.use('/message', messageRoute)
 app.use('/home', homeRoute)
 app.use('/', userRoute)
