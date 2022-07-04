@@ -1,11 +1,16 @@
 const UserModel = require('../models/user')
 const model= new UserModel();
+const crypto = require('crypto')
 
 class SignupController {
     constructor(username, password) {
         if (!this.has_value([username, password])) throw new Error('Username and password can not be empty')
         this.username = username;
         this.password = password;
+        this.salt = crypto.randomBytes(16).toString('hex')
+        this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex')
+        this.password = this.hash
+
         // console.log(username)
         
     }
@@ -40,7 +45,7 @@ class SignupController {
         return false
     }
     async create(end = false, callback = null){
-        let data = await model.create({ username: this.username, password: this.password, private_id: new Date().valueOf() }, callback);
+        let data = await model.create({ username: this.username, password: this.password, salt: this.salt, private_id: new Date().valueOf() }, callback);
         // console.log(data)
         // console.log('creating', data)
         if(end) return await this.end()

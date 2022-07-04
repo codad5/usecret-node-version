@@ -1,5 +1,6 @@
 const UserModel = require('../models/user')
-const model= new UserModel();
+const model= new UserModel(),
+crypto = require('crypto')
 
 class SignupController {
     constructor(username, password) {
@@ -32,7 +33,12 @@ class SignupController {
     }
     async userExist(end = false){
         try{
-            const data = await model.find({username:this.username, password:this.password})
+            const checkData = await this.getData(),
+            salt = checkData?.salt,
+            hash = crypto.pbkdf2Sync(this.password, salt, 1000, 64, 'sha512').toString('hex')
+            console.log(salt)
+            console.log(checkData.password, hash)
+            const data = await model.find({ username: this.username, password: hash })
             // console.log(data)
             // console.log(data, 1000)
             // console.log(await data.hasNext(), 2000)
