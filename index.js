@@ -1,7 +1,7 @@
 const express= require('express')
 const app = express()
 const bodyParser = require('body-parser');
-//const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const session = require('express-session')
 const http = require('http').Server(app)
 var io = require('socket.io')(http)
@@ -15,7 +15,7 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(express.json())
-//app.use(cookieParser())
+app.use(cookieParser())
 app.use(session({secret:"qwe2930823408234",  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24}}))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
