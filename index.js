@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(cookieParser())
 app.set('trust proxy', 1);
-app.use(session({secret:"qwe2930823408234",  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24, sameSite:false,httpOnly:true }}))
+app.use(session({secret:"qwe2930823408234",  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24, sameSite:false,httpOnly:true,secure:true }}))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
     req.io = io
