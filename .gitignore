@@ -1,4 +1,8 @@
 /node_modules
-
-/config
 .env
+.env.local
+dist
+coverage
+# __tests__
+coverage
+yarn-error.log

@@ -17,13 +17,13 @@ app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(express.json())
 app.use(cookieParser())
-// app.set('trust proxy', 1);
-app.use(session({secret:"process.env.SESSION_KEY",  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24, sameSite:false, httpOnly:true, secure:true }}))
+app.set('trust proxy', 1);
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
     req.io = io
     return next()
 })
+app.use(session({secret:process.env.SESSION_KEY,  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24, sameSite:false, httpOnly:true, secure:true }}))
 app.use('/message', messageRoute)
 app.use('/home', homeRoute)
 app.use('/', userRoute)
