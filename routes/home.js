@@ -12,7 +12,8 @@ const isLogin = (req) => {
 // router.use(bodyParser.urlencoded({ extended: true }))
 router.route('/').
     get(async (req, res) => {
-        // console.log(req., 'printing url')
+        console.log(req.session)
+        console.log('printing url')
         if (!isLogin(req)) return res.redirect('../login')
         const home = new HomeController(req.session.user, null)
         let data = await home.getData()
