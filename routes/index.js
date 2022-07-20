@@ -33,6 +33,7 @@ router.route('/login').
             let loginData = await login.getData()
             req.session.user = req.body?.username;
             req.session.pid = loginData.private_id;
+            console.log(req.session)
             if (isLogin(req)) return res.redirect('/home'); 
             
             // res.send('Working')
