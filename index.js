@@ -35,6 +35,7 @@ app.use((req, res, next)=> {
 
 //Configure redis client
 const redisClient = new Redis({
+    username:process.env.REDIS_USERNAME,
     host:process.env.REDIS_HOST,
     port:process.env.REDIS_PORT,
     password:process.env.REDIS_PASSWORD
