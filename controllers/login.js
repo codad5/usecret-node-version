@@ -33,13 +33,14 @@ class SignupController {
     }
     async userExist(end = false){
         try{
+            console.log('starting userExist method')
             const checkData = await this.getData(),
-            salt = checkData?.salt,
+            salt = checkData?.salt || '',
             hash = crypto.pbkdf2Sync(this.password, salt, 1000, 64, 'sha512').toString('hex')
             console.log(salt)
-            console.log(checkData.password, hash)
+            console.log(checkData?.password, hash)
             const data = await model.find({ username: this.username, password: hash })
-            // console.log(data)
+            console.log(data)
             // console.log(data, 1000)
             // console.log(await data.hasNext(), 2000)
             // console.log('testing')

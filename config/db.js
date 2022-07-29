@@ -22,9 +22,9 @@ class dbConnect {
         this.open = async () => {
             console.log('attempting to connect mongodb', this.connected)
             if(this.connected == false){
-                await this.client.connect();
+                let connection = await this.client.connect();
                 this.connected = true
-                console.log('cconnectiong to mongodb ', this.connected)
+                console.log('cconnection to mongodb ', this.connected)
             }
             const database = this.client.db(db);
             return database.collection(this.collection)

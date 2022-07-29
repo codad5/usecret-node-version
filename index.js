@@ -12,7 +12,6 @@ const messageRoute = require('./routes/message')
 // const redisStore = require('connect-redis')
 const Redis = require('ioredis');
 const connectRedis = require('connect-redis');
-const { Console } = require('console');
 const RedisStore = connectRedis(session)
 
 
@@ -27,12 +26,19 @@ app.use(express.json())
 app.set('trust proxy', 1);
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
+    console.group('calling')
+    console.log('checking')
+    console.groupEnd()
     req.io = io
     return next()
 })
 
 //Configure redis client
-const redisClient = new Redis()
+const redisClient = new Redis({
+    host:process.env.REDIS_HOST,
+    port:process.env.REDIS_PORT,
+    password:process.env.REDIS_PASSWORD
+})
 
 
 

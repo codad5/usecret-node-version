@@ -18,8 +18,9 @@ router.route('/', (req, res) => {
 router.route('/login')
     .get((req, res) => {
         
+        
         if(isLogin(req)) return res.redirect('/home')
-        res.render('login');
+        return res.render('login', req.query);
     })
     .post(async (req, res, next) => {
         // console.log(req.params.id)
@@ -32,7 +33,7 @@ router.route('/login')
             // console.log('err')
 
             if (await login.userExist(true) === false) {
-                await login.end(); return res.render('login', { username: req.body?.username, password: req.body?.password, error: "user dont exist" });
+                await login.end(); return res.redirect('login?err=user dont exist');
             }
             let loginData = await login.getData()
             req.session.user = req.body?.username;
@@ -45,7 +46,7 @@ router.route('/login')
         catch (err) {
             console.log(err)
             // next(err)
-            return res.render('login', { username: req.body?.username, password: req.body?.password, error: err })
+            return res.redirect('/login?error=something went wrong so sad')
             // res.status(500).send(err.message);
         }
 
