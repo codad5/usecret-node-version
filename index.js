@@ -9,6 +9,13 @@ var io = require('socket.io')(http)
 const userRoute = require('./routes/index')
 const homeRoute = require('./routes/home')
 const messageRoute = require('./routes/message')
+// const redisStore = require('connect-redis')
+const Redis = require('ioredis');
+const connectRedis = require('connect-redis');
+const { Console } = require('console');
+const RedisStore = connectRedis(session)
+
+
 
 
 
@@ -16,18 +23,37 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(express.json())
-// app.use(cookieParser())
+// app.use(cookieParser())s
 app.set('trust proxy', 1);
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
     req.io = io
     return next()
 })
-app.use(session({secret:process.env.SESSION_KEY,  resave:false, saveUninitialized:true, cookie: {maxAge:1000 * 60 * 60 * 24, sameSite:false, httpOnly:true }}))
+
+//Configure redis client
+const redisClient = new Redis()
+
+
+
+
+app.use(session({
+    store: new RedisStore({client:redisClient}),
+        secret:process.env.SESSION_KEY,
+        credentials:true,   
+        resave:false,
+        saveUninitialized:false,
+        cookie: {
+            maxAge:1000 * 60 * 60 * 24,
+            sameSite:false,
+            httpOnly:false
+         }}))
+
 app.use('/message', messageRoute)
 app.use('/home', homeRoute)
 app.use('/', userRoute)
 app.get('/', (req, res) => {
+    console.log('chill')
     res.render('index', {text: 'world'})
 })
 app.get('/css/:id', (req, res) => {
@@ -43,6 +69,6 @@ app.get('/css/:id', (req, res) => {
 
 
 const server = http.listen(process.env.PORT || 5000, () => {
-   console.log('server listening on port '+server.address().port)
+   console.log('server listening on port '+server.address().port+' on '+process.env.ENVIRONMENT)
     
 })

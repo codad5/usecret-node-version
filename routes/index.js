@@ -7,19 +7,23 @@ const isLogin = (req) => {
     if(!req.session.user) return false
     return true
 }
+console.log('in index.js')
 // router.use(bodyParser.json())
 // router.use(express.json())
 // router.use(bodyParser.urlencoded({ extended: true }))
 router.route('/', (req, res) => {
+    console.log('hello')
     return res.render('index', { url: req.protocol + '://' + req.headers.host })
 })
-router.route('/login').
-    get((req, res) => {
+router.route('/login')
+    .get((req, res) => {
+        
         if(isLogin(req)) return res.redirect('/home')
         res.render('login');
     })
     .post(async (req, res, next) => {
         // console.log(req.params.id)
+        console.log('logging in')
         if (isLogin(req)) return res.redirect('/home')
         let login = new LoginController(req.body?.username, req.body?.password)
         try {
