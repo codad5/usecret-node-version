@@ -62,11 +62,13 @@
 
         
         const postMessages = (message) => {
+            document.querySelector('#errormessage').innerHTML = 'sending...';
             $.post('/message/send', message, (err) => {
                     $("#name").val(""),
                     $("#message").val("")
                     console.log(err)
-                    if(err !== null) document.querySelector('#errormessage').innerHTML = 'sent';
+                    if(err !== null) document.querySelector('#errormessage').innerHTML = 'sent!';
+                    if(err) document.querySelector('#errormessage').innerHTML = 'fail to send';
             })
         }
     </script>
