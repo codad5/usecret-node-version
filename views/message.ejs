@@ -38,7 +38,7 @@
 
         $(() => {
             $("#send").click(() => {
-                if($("#message").val().length > 70) {
+                if($("#message").val().length > 150) {
                     console.log('message too long')
                     document.querySelector('#errormessage').innerHTML = 'message too long';
                     return;
