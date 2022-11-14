@@ -22,9 +22,9 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(cookieParser())s
 app.set('trust proxy', 1);
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next)=> {
     console.group('calling')
     console.log('checking')

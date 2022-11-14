@@ -64,7 +64,8 @@ router.route('/signup').
             signup.validateParam()
             // console.log('err')
             if (await signup.userExist(true)){
-                await signup.end(); return res.render('signup', { username: req.body?.username, password: req.body?.password, error: "user exist" });
+                await signup.end(); 
+                return res.render('signup', { username: req.body?.username, password: req.body?.password, error: "user exist" });
             } 
             await signup.create(true, (err, result) => {
                 console.log('done running create function')
