@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/currencynet/bootstrap/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="http://localhost/currencynet/bootstrap/css/bootstrap.min.css" />
     <script src="http://localhost/currencynet/bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://localhost/currencynet/scripts/jquery-3.6.0.min.js"></script>
+    <script src="http://localhost/currencynet/scripts/jquery-3.6.0.min.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>message <%= locals.r_username %> anonyimously</title>
@@ -65,7 +65,7 @@
             document.querySelector('#errormessage').innerHTML = 'sending...';
             $.post('/message/send', message, (data) => {
                     $("#name").val(""),
-                    $("#message").va l("")
+                    $("#message").val("")
                     console.log(data)
                     let messages = ''
                     message = !data.error ?  'sent' : 'fail to sent'
