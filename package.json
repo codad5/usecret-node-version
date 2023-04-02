@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "codad5",
   "license": "ISC",
@@ -26,5 +27,8 @@
     "mysql2": "^2.3.3",
     "redis": "^4.2.0",
     "socket.io": "^4.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
