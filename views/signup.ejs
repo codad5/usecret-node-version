@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Usecret is an anoymous messaging application to help receive reviews from friends anonymously" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Social Media Platform | For Friends" />
+    <meta property="og:description"
+        content="Usecret is an anoymous messaging application to help receive reviews from friends & co-workers anonymously to improve on your self" />
+    <meta property="og:url" content="<%= locals.url %>" />
+    <meta property="og:site_name" content="Usecret is an anoymous messaging application" />
+    <!-- <meta name="twitter:card" content="summary_large_image" /> -->
+    <meta name="twitter:title" content="Usecret is an anoymous messaging application" />
+    <meta name="twitter:description" content="Usecret is an anoymous messaging application to help receive reviews from friends & co-workers
+        anonymously to improve on your self" />
+    <!-- <meta name="twitter:image" content="http://localhost/static/brand/banner_logo.png" /> -->
+    <meta name="theme-color" content="#314352" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "<%= locals.url %>/",
+            "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "http://localhost/search/{search_term_string}/",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "<%= locals.url %>/",
+            "name": "Usecret: is an anoymous messaging application to help receive reviews from friends anonymously",
+            "logo": "<%= locals.url %>/static/brand/banner_logo.png"
+        }
+    </script>
+    <title>Signup</title>
+    <link rel="stylesheet" href="css/index">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+
+</head>
+<body>
+    <main>
+        <a href="../../../" class="action-btn top-action">Home</a>
+        <section class="signup-section">
+            <!-- Signup page '' -->
+            <div class="form-cnt">
+                <h2 class="form-header">Signup</h2>
+                <form method="post" action="/signup">
+                    <input name="username" type="text" placeholder="username">
+                    <input name="password" type="password" placeholder="password">
+                    <input name="submit" type="submit" value="submit">
+                    <span class="form-noti"><%= locals.error || ''   %></span>
+                </form>
+            </div>
+        </section>
+        <div class="floating_message shake-slow ">
+            <a href="/login">Login <span class="fa fa-sign-in"></span> </a>
+        </div>
+    </main>
+    
+</body>
+</html>
