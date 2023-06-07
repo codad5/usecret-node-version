@@ -15,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <footer className='w-screen text-center p-4 h-20'>
+            <span>Built by Chibueze</span>
+        </footer>
+      </body>
     </html>
   )
 }
