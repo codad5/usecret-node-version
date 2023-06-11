@@ -1,3 +1,4 @@
+import Providers from '@/components/Providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,12 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Providers>
       <body className={inter.className}>
         {children}
         <footer className='w-screen text-center p-4 h-20'>
             <span>Built by Chibueze</span>
         </footer>
       </body>
+      </Providers>
     </html>
   )
 }

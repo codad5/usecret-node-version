@@ -1,3 +1,4 @@
+import Providers from '@/components/Providers'
 import AuthPage from '@/components/auth-page'
 import { Splash } from 'next/font/google'
 import Image from 'next/image'

@@ -1,5 +1,11 @@
 
-export default function Home() {
+import {getServerSession} from "next-auth/next"
+import {redirect} from "next/navigation"
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
+export default async function Home() {
+	const session = await getServerSession(authOptions)
+	if(!session) return redirect("/api/auth/signin?callbackUrl=/messages")
 	const whatsappConnected = false;
 	const messages = [
 			{
@@ -79,6 +85,11 @@ export default function Home() {
 			</div>
 			</section>
 			<section className="w-full p-2">
+				<h1>Welcome back {session?.user?.email}</h1>
+				{/* Logout */}
+				<form action="/api/auth/signout" method="POST">
+					<button type="submit">Sign out</button>
+				</form>
 				<h1 className="w-full p-3 sticky top-0 z text-center">Your Messages</h1>
 				<div className="w-full p-3 grid place-items-center">
 					<div className="w-full max-w-screen-md border border-white py-2 space-y-2">
