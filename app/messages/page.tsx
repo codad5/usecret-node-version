@@ -5,7 +5,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export default async function Home() {
 	const session = await getServerSession(authOptions)
-	if(!session) return redirect("/api/auth/signin?callbackUrl=/messages")
+	if(!session) return redirect("/")
 	const whatsappConnected = false;
 	const messages = [
 			{
