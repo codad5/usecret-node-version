@@ -19,7 +19,7 @@ export default function RootLayout({
       <Providers>
       <body className={inter.className}>
         {children}
-        <footer className='w-screen text-center p-4 h-20'>
+        <footer className='w-full text-center p-4 h-20'>
             <span>Built by Chibueze</span>
         </footer>
       </body>

@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^1.0.0",
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
     "ioredis": "^5.3.2",
+    "mongodb": "^5.6.0",
     "mongoose": "^7.2.2",
     "next": "13.4.4",
     "next-auth": "^4.22.1",
