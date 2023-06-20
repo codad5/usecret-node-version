@@ -2,12 +2,12 @@
 import {getServerSession} from "next-auth/next"
 import {redirect} from "next/navigation"
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import userModel from "@/utils/Models/User";
 
 export default async function Home() {
 	const session = await getServerSession(authOptions)
 	if(!session) return redirect("/api/auth/signin")
 	console.log(session)
-	const whatsappConnected = false;
 	const messages = [
 			{
 				message:"Hello how are you",
@@ -87,6 +87,7 @@ export default async function Home() {
 			</section>
 			<section className="w-full p-2">
 				<h1>Welcome back {session?.user?.email}</h1>
+				
 				{/* Logout */}
 				<form action="/api/auth/signout" method="POST">
 					<button type="submit">Sign out</button>

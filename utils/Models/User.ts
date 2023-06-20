@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: false },
     email: { type: String, required: false, unique: true },
+    phone : { type : String, required: false, unique: true },
 })
 
 export default mongoose.models.User || mongoose.model('User', UserSchema)

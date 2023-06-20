@@ -1,12 +1,13 @@
-import NextAuth from "next-auth"
+import NextAuth, {AuthOptions} from "next-auth"
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/utils/mongoose";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import userModel from "@/utils/Models/User";
 import { createUser } from "@/utils/Auth";
+import { redirect } from "next/navigation";
 
-export const authOptions = {
+export const authOptions : AuthOptions = {
     providers:[
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -14,11 +15,7 @@ export const authOptions = {
         }),
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
-            name: "Credentials",
-            // `credentials` is used to generate a form on the sign in page.
-            // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-            // e.g. domain, username, password, 2FA token, etc.
-            // You can pass any HTML attribute to the <input> tag through the object.
+            name: "login",
             credentials: {
             username: { label: "Username", type: "text", placeholder: "jsmith" },
             password: { label: "Password", type: "password" },
@@ -31,13 +28,13 @@ export const authOptions = {
                     let user = await userModel.findOne({ username: credentials?.username })
                     if(user){
                         // if user exist check if password match
-                        if(user.password === credentials?.password) return { id: user._id, name: user.username, email: user.email}
+                        if(user.password === credentials?.password) return { id: user._id, name: user.username, email: user.email, phone: user.phone}
                         throw new Error("Password does not match, or username already taken")
                     }
                     // if user does not exist register the user
                     await createUser(credentials?.username as string, credentials?.password)
                     user = await userModel.findOne({ username: credentials?.username })
-                    if(user) return { id: user._id, name: user.username, email: user.email}
+                    if(user) return { id: user._id, name: user.username, email: user.email, phone : user.phone}
                     return null
                 }
                 catch(err){
@@ -48,27 +45,23 @@ export const authOptions = {
             }
         })
     ],
-    callback: {
+    callbacks: {
         async signIn({user, account, profile, email, credentials }) {
-            console.log("sign in")
-            console.log(user)
-            console.log("account")
-            console.log(account)
-            console.log("profile")
-            console.log(profile)
-            console.log("email")
-            console.log(email)
-            console.log("credentials")
-            console.log(credentials)
-            return false
+            console.log("sign in", account?.provider)
+            if (account?.provider === 'google') {
+                const check_user = await userModel.findOne({email:email as string})
+                if(!check_user?.username){
+                    redirect('/complete-profile')
+                }
+            }
+            return true
         },
         async session({session, token, user}) {
             console.log("session")
-            console.log(session)
-            console.log("token")
-            console.log(token)
-            console.log("user")
-            console.log(user)
+            // session.user = user
+            console.log(session, user)
+            const user_data = session?.user?.email ? await userModel.findOne({email:session?.user?.email}) : await userModel.findOne({username:session?.user?.name})
+            session.user = {...user_data, password : undefined, _id: undefined}
             return session
         }
     },
