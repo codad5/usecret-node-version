@@ -1,63 +1,24 @@
 
 import {getServerSession} from "next-auth/next"
 import {redirect} from "next/navigation"
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import userModel from "@/utils/Models/User";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Message from "@/utils/Models/Message";
+import { MessageModel } from "@/utils/types/Models";
+const dateOptions : Intl.DateTimeFormatOptions = {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true,
+};
+
 
 export default async function Home() {
 	const session = await getServerSession(authOptions)
 	if(!session) return redirect("/api/auth/signin")
-	console.log(session)
-	const messages = [
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			},
-			{
-				message:"Hello how are you",
-				time:"2023 may 14th",
-			}
-	];
+	const messages = await Message.find<MessageModel>({username: session.user?.name})
 	return (
 		<div className="overflow-x-hidden min-h-screen">
 			<header className="sticky text-center w-screen p-4 top-5  before:absolute before:h-[300px] before:w-[480px]  before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px]  after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40">
@@ -102,7 +63,7 @@ export default async function Home() {
 								</div>
 								<div className="w-full p-2">
 									<small className="text-sm italic font-extralight">
-										{v.time}
+										{v.date.toLocaleString(undefined , dateOptions)}
 									</small>
 								</div>
 							</div>

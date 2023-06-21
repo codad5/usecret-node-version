@@ -1,10 +1,18 @@
+
+import MessageForm from "@/components/message-form"
 import User from "@/utils/Models/User"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import connectDb from "@/utils/mongoose"
+import {redirect} from "next/navigation"
+
+import { getServerSession } from "next-auth"
 
 export default async function TextMe({ params }: { params: { id: string } }){
     await connectDb()
+    const session = await getServerSession(authOptions)
+	if(session) return redirect("/messages")
     const user = await User.findOne({username:params.id})
-    console.log('user===', user)
+    
     return(
         <>
         <div className="overflow-x-hidden min-h-[90vh]">
@@ -18,12 +26,7 @@ export default async function TextMe({ params }: { params: { id: string } }){
                 {
                     user ? (
                         <div className=" w-full h-full">
-                            <span>Drop a message for {user.username}</span>
-                            <form action={`/api/send-message`} method="POST" className="text-black">
-                                <input type="text" value={`${user.username}`} readOnly={true} name="username"/>
-                                <textarea maxLength={200} name="message"></textarea>
-                                <button type="submit" className="text-red">Send</button>
-                            </form>
+                            <MessageForm user={{ username: user.username }} />
                         </div>
                     ) : ( 
                         <div className="flex flex-col items-center justify-center w-full h-full">
