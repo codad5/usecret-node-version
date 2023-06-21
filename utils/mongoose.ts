@@ -10,7 +10,8 @@ const connectDb = async () => {
       return mongoose.connect(process.env.MONGODB_URI ?? '', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 30000 
+        serverSelectionTimeoutMS: 30000 ,
+        dbName: process.env.MONGODB_DB,
       } as ConnectOptions );
     } catch (error) {
       console.log(error);
