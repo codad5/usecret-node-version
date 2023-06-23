@@ -1,18 +1,20 @@
 import React from 'react';
-import {useState , useRef} from 'react'
+import {useState , useRef, useEffect} from 'react'
 
 export type NotificationType = 'error' | 'success' | 'info' | 'warning'
-const Notification = ({ message , type = 'success'} : {message : string, type ?: NotificationType}) => {
-  const [show, setShow] = useState(true);
-  const timeout = useRef<NodeJS.Timeout>();
-  React.useEffect(() => {
+const Notification = ({ message :msg , type = 'success'} : {message ?: string|null, type ?: NotificationType}) => {
+  const [show, setShow] = useState(msg ? true : false)
+  const timeout = useRef<NodeJS.Timeout>()
+  console.log("aooooooo", show, msg)
+  useEffect(() => {
+    console.log("running")
     timeout.current = setTimeout(() => {
-      setShow(false);
+      setShow(false)
     }, 2000);
     return () => {
       if (timeout.current) clearTimeout(timeout.current);
     };
-  }, [message, type])
+  }, [msg, type])
   const color = {
     success: 'bg-green-100 text-green-700',
     error: 'bg-red-100 text-red-700',
@@ -22,10 +24,10 @@ const Notification = ({ message , type = 'success'} : {message : string, type ?:
   return (
     <>
       {
-        show ? (
+        msg ? (
           <div className="notification fixed top-4 w-full grid place-items-center">
             <div className={`max-w-md w-full ${color} p-4 text-semibold`}>
-              {message}
+              {msg}
             </div>
           </div>
         ) : null
