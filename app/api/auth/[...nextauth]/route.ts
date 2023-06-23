@@ -48,17 +48,11 @@ export const authOptions : AuthOptions = {
     callbacks: {
         async signIn({user, account, profile, email, credentials }) {
             console.log("sign in", account?.provider)
-            if (account?.provider === 'google') {
-                const check_user = await userModel.findOne({email:email as string})
-                if(!check_user?.username){
-                    redirect('/complete-profile')
-                }
-            }
             return true
         },
         async session({session, token, user}) {
             const user_data = session?.user?.email ? await userModel.findOne({email:session?.user?.email}) : await userModel.findOne({username:session?.user?.name})
-            session.user = {  name: user_data?.username, email: user_data?.email};
+            session.user = user_data ? {  name: user_data?.username, email: user_data?.email} : session?.user;
             (session as any) = { ...session, username : user_data?.username, email: user_data?.email, phone: user_data?.phone}
             return session
         }

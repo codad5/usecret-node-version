@@ -4,6 +4,7 @@ import {redirect} from "next/navigation"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Message from "@/utils/Models/Message";
 import { MessageModel } from "@/utils/types/Models";
+import userModel from "@/utils/Models/User";
 const dateOptions : Intl.DateTimeFormatOptions = {
   weekday: 'short',
   day: 'numeric',
@@ -18,6 +19,11 @@ const dateOptions : Intl.DateTimeFormatOptions = {
 export default async function Home() {
 	const session = await getServerSession(authOptions)
 	if(!session) return redirect("/api/auth/signin")
+	const check_user = await userModel.findOne({email:(session?.user?.email ?? '')as string})
+	console.log("check user", check_user, session?.user)
+	if(!check_user?.username && session?.user?.email){
+		redirect('/complete-profile') 
+	}
 	const messages = await Message.find<MessageModel>({username: session.user?.name})
 	return (
 		<div className="overflow-x-hidden min-h-screen">
