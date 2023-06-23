@@ -3,7 +3,7 @@ import {getServerSession} from "next-auth/next"
 import {redirect} from "next/navigation"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Message from "@/utils/Models/Message";
-import { MessageModel } from "@/utils/types/Models";
+import { MessageModel, UsersModel } from "@/utils/types/Models";
 import userModel from "@/utils/Models/User";
 const dateOptions : Intl.DateTimeFormatOptions = {
   weekday: 'short',
@@ -19,7 +19,7 @@ const dateOptions : Intl.DateTimeFormatOptions = {
 export default async function Home() {
 	const session = await getServerSession(authOptions)
 	if(!session) return redirect("/api/auth/signin")
-	const check_user = await userModel.findOne({email:(session?.user?.email ?? '')as string})
+	const check_user = await userModel.findOne<UsersModel>({email:(session?.user?.email ?? '')as string})
 	console.log("check user", check_user, session?.user)
 	if(!check_user?.username && session?.user?.email){
 		redirect('/complete-profile') 
@@ -38,20 +38,23 @@ export default async function Home() {
 			GET FEEDBACKS FROM FRiENDS
 			</h3>
 		</section>
-		<section className='w-full p-4'>
-			<div className='w-full grid place-items-center p-1'>
-				<span className='text-2xl font-bold'>Connect Whatsapp</span>
-			</div>
-			<div className='w-full grid place-items-center p-4 pt-1'>
-				<form className='w-4/5 p-2 max-w-screen-md'>
-				<label htmlFor="whatsapp-no" className='w-full text-base text-sky-900 font-semibold'></label>
-				<input type="tel" name="whatsapp-no" placeholder='WhatsApp No' id="whatsapp-no" className='mb-3 outline-none bg-transparent border border-zinc-500 p-2 w-full' />
-				<button name="sign-in-with-google" type="button" className='bg-green-600 px-2 py-1 text-xl rounded-md text-center w-full'>
-					Connect
-				</button>
-				</form>
-			</div>
-			</section>
+		{
+			!check_user?.phone ? 
+			<section className='w-full p-4'>
+				<div className='w-full grid place-items-center p-1'>
+					<span className='text-2xl font-bold'>Connect Whatsapp</span>
+				</div>
+				<div className='w-full grid place-items-center p-4 pt-1'>
+					<form className='w-4/5 p-2 max-w-screen-md'>
+					<label htmlFor="whatsapp-no" className='w-full text-base text-sky-900 font-semibold'></label>
+					<input type="tel" name="whatsapp-no" placeholder='WhatsApp No' id="whatsapp-no" className='mb-3 outline-none bg-transparent border border-zinc-500 p-2 w-full' />
+					<button name="sign-in-with-google" type="button" className='bg-green-600 px-2 py-1 text-xl rounded-md text-center w-full'>
+						Connect
+					</button>
+					</form>
+				</div>
+			</section> : null
+		}
 			<section className="w-full p-2">
 				<h1>Welcome back {session?.user?.email}</h1>
 				
