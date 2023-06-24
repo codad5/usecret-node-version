@@ -17,13 +17,13 @@ export const signUpuser = async (username: string, password?: string, email?: st
 export const createUser = async (username: string, password?: string, email ?: string) => {
     try{
         const user = new userModel({
-            username : username,
+            username : username.toLowerCase(),
             password: await hashPassword(password ?? ''),
             email: email
         })
         return await user.save()
     }catch(err) {
-        console.log(err);
+        console.log(`error from create user${err}`);
         return false
     }
 }

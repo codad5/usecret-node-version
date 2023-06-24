@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth"
 export default async function TextMe({ params }: { params: { id: string } }){
     await connectDb()
     const session = await getServerSession(authOptions)
-	if(session) return redirect("/messages")
+	if(session?.user?.name == params.id) return redirect("/messages")
     const user = await User.findOne({username:params.id})
     
     return(

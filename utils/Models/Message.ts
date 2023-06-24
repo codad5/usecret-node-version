@@ -5,6 +5,7 @@ import connectDb from "@/utils/mongoose"
 import { MessageModel } from "../types/Models";
 
 
+
 // a schema for the user
 const MessageSchema = new mongoose.Schema<MessageModel>({
     username: { type: String, required: true },

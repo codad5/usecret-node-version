@@ -12,7 +12,12 @@ export type checkUsernameAvailabilityResponseData = {
     available : boolean
 }
 
-export type ResponseData = MessageSentResponseData | GetMessagesResponseData | checkUsernameAvailabilityResponseData;
+export type completeProfileResponseData = {
+  username:string,
+  email:string,
+  phone ?: string
+}
+export type ResponseData = MessageSentResponseData | GetMessagesResponseData | checkUsernameAvailabilityResponseData | completeProfileResponseData;
 
 export type SuccessResponse<T> = {
   success: true;

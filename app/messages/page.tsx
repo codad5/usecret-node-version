@@ -55,7 +55,7 @@ export default async function Home() {
 			</section> : null
 		}
 			<section className="w-full p-2">
-				<h1>Welcome back {session?.user?.email}</h1>
+				<h1>Welcome back {session?.user?.name}</h1>
 				
 				{/* Logout */}
 				<form action="/api/auth/signout" method="POST">
