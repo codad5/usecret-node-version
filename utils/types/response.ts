@@ -8,7 +8,11 @@ export type GetMessagesResponseData = {
     messages : MessageModel[]
 }
 
-export type ResponseData = MessageSentResponseData | GetMessagesResponseData;
+export type checkUsernameAvailabilityResponseData = {
+    available : boolean
+}
+
+export type ResponseData = MessageSentResponseData | GetMessagesResponseData | checkUsernameAvailabilityResponseData;
 
 export type SuccessResponse<T> = {
   success: true;

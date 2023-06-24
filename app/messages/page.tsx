@@ -20,7 +20,6 @@ export default async function Home() {
 	const session = await getServerSession(authOptions)
 	if(!session) return redirect("/api/auth/signin")
 	const check_user = await userModel.findOne<UsersModel>({email:(session?.user?.email ?? '')as string})
-	console.log("check user", check_user, session?.user)
 	if(!check_user?.username && session?.user?.email){
 		redirect('/complete-profile') 
 	}
@@ -84,3 +83,4 @@ export default async function Home() {
 		</div>
 	)
 }
+ 

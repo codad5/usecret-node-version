@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import userModel from "@/utils/Models/User";
+import CompleteProfile from '@/components/complete-profile'
 
 
 export default async function Home() {
@@ -25,11 +26,7 @@ export default async function Home() {
       </header>
       <main className='w-full'>
          {/* get user name after first google auth signin */}
-         <form className="flex flex-col items-center justify-center w-full h-full">
-            <label className="text-xl font-bold text-center">Enter your Username</label>
-            <input className="w-3/4 p-2 m-2 text-xl border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" placeholder="Your name" />
-             <button className="w-3/4 p-2 m-2 text-xl font-bold text-white bg-blue-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="submit">Submit</button>
-        </form>
+         <CompleteProfile />
       </main>
     </div>
   )
