@@ -5,6 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Message from "@/utils/Models/Message";
 import { MessageModel, UsersModel } from "@/utils/types/Models";
 import userModel from "@/utils/Models/User";
+import {CopyMessageLink} from "@/components/copy-clipboard";
 const dateOptions : Intl.DateTimeFormatOptions = {
   weekday: 'short',
   day: 'numeric',
@@ -56,6 +57,10 @@ export default async function Home() {
 		}
 			<section className="w-full p-2">
 				<h1>Welcome back {session?.user?.name}</h1>
+				<div>
+					hello
+					<CopyMessageLink messageId={`${session?.user?.name}`} />
+				</div>
 				
 				{/* Logout */}
 				<form action="/api/auth/signout" method="POST">
