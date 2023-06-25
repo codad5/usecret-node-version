@@ -51,6 +51,7 @@ export const authOptions : AuthOptions = {
             return true
         },
         async session({session, token, user}) {
+            await clientPromise()
             const user_data = session?.user?.email ? await userModel.findOne({email:session?.user?.email}) : await userModel.findOne({username:session?.user?.name})
             session.user = user_data ? {...session.user,  name: user_data?.username, email: user_data?.email} : session?.user;
             (session as any) = { ...session, username : user_data?.username, email: user_data?.email, phone: user_data?.phone}

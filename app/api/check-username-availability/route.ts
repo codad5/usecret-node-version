@@ -1,15 +1,18 @@
 import User from "@/utils/Models/User"
 import { CustomResponse, ErrorResponse, MessageSentResponseData, checkUsernameAvailabilityResponseData } from "@/utils/types/response"
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { authOptions } from "../auth/[...nextauth]/route";
 import connectDb from "@/utils/mongoose";
 
-export const GET = async (req: Request) => {
+
+
+export const dynamic = 'force-dynamic'
+
+
+export const GET = async (req: NextRequest) => {
     try {
-        const url = new URL(req.toString());
-        const params = new URLSearchParams(url.search);
-        const username = params.get("username")?.trim()
+        const username = req.nextUrl.searchParams?.get("username")
         if(!username) throw new Error("No username given")
         if(username.length < 4) throw new Error("username too short")
         await connectDb()

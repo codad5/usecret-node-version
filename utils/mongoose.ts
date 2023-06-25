@@ -14,7 +14,7 @@ const connectDb = async () => {
         dbName: process.env.MONGODB_DB,
       } as ConnectOptions );
     } catch (error) {
-      console.log(error);
+      console.log(error, 'error connecting mongodb database');
     }
   };
 
