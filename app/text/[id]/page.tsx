@@ -6,6 +6,18 @@ import connectDb from "@/utils/mongoose"
 import {redirect} from "next/navigation"
 
 import { getServerSession } from "next-auth"
+import { ResolvingMetadata, Metadata } from "next";
+
+export async function generateMetadata(
+  { params }: { params: { id: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+    return {
+        ...(await parent),
+        title: `Tell ${params?.id} anything`,
+        description : `Send anonymous messages to ${params?.id}`
+    } as Metadata
+}
 
 export default async function TextMe({ params }: { params: { id: string } }){
     await connectDb()

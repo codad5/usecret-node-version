@@ -36,7 +36,7 @@ export default function CompleteProfile(){
             if(!data.success) throw new Error(`${data.message} -- ${data.error}`)
             setNotification({message:`your username is ${data.data.username}`, type:'success'})
             setTimeout(() => {
-                redirect("/message")
+                window.location.href = "/messages"
             }, 600);
         }catch(err){
             setNotification({message: (err as Error).message, type:"error"})

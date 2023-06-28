@@ -1,6 +1,7 @@
 import Message from "@/utils/Models/Message"
 import { CustomResponse, ErrorResponse, MessageSentResponseData } from "@/utils/types/response"
 import { NextResponse } from "next/server"
+import { Server } from "socket.io"
 export const POST = async (req: Request) => {
     try {
         const data = await req.json()
