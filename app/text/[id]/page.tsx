@@ -14,7 +14,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
     return {
         ...(await parent),
-        title: `Tell ${params?.id} anything`,
+        title: `say something to ${params?.id}`,
         description : `Send anonymous messages to ${params?.id}`
     } as Metadata
 }
