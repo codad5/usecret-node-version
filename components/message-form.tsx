@@ -30,6 +30,8 @@ export default function MessageForm({user} : { user : UsersModel}) {
         }
         try{
             console.log(data)
+            if(data.message.length > 200) throw new Error('Message is too long')
+            if(data.message.length < 7) throw new Error('Message is too short')
             const {data : res} : { data: CustomResponse<MessageSentResponseData>} = await axios.post('/api/send-message', data)
             console.log(res)
             if(!res.success) throw new Error(`${res.error}`)
@@ -60,10 +62,10 @@ export default function MessageForm({user} : { user : UsersModel}) {
     return (
         <div className="w-full grid place-items-center">
         <Notification message={notificationMessage.message} type={notificationMessage.type} />
-        <div className="p-4 max-w-md w-4/5 md:w-full z-10 inline-block">
+        <div className="p-4 max-w-md w-4/5 z-10 inline-block">
             <h3>Tell <span className="font-bold">{user.username}</span> what you think about them</h3>
             <form action={`/api/send-message`} method="POST" className="text-black w-full pt-2" encType="multipart/form-data" onSubmit={handleSubmit}>
-                <textarea maxLength={200} name="message" id="message" className="text-black w-full h-40 p-2 dark:bg-gray-800 dark:text-white" placeholder="Your message" value={message} onChange={handleTextChange}></textarea>
+                <textarea maxLength={200} name="message" id="message" className="text-black w-full h-40 p-2 dark:bg-gray-800 dark:text-white h-60" placeholder="Your message" value={message} onChange={handleTextChange}></textarea>
                 <div className="w-full text-right p-2">
                     <span className={`${countColor}`}>{wordCount}/200</span>
                 </div>

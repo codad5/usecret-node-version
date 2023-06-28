@@ -37,7 +37,7 @@ export default async function TextMe({ params }: { params: { id: string } }){
                 <div className="w-full p-4">
                 {
                     user ? (
-                        <div className=" w-full p-4">
+                        <div className=" w-full py-4">
                             <MessageForm user={{ username: user.username }} />
                         </div>
                     ) : ( 
