@@ -10,13 +10,14 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
+    "@green-api/whatsapp-api-client": "^0.3.38",
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bad-words": "^3.0.4",
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^5.1.1",
     "formidable": "^3.4.0",
     "ioredis": "^5.3.2",
     "mongodb": "^5.6.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@types/bad-words": "^3.0.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/formidable": "^2.0.6"
   }
 }

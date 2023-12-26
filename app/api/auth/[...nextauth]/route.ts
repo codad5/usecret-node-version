@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/utils/mongoose";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import userModel from "@/utils/Models/User";
-import { createUser } from "@/utils/Auth";
+import { createUser, matchPassword } from "@/utils/Auth";
 import { redirect } from "next/navigation";
 
 export const authOptions : AuthOptions = {
@@ -28,7 +28,7 @@ export const authOptions : AuthOptions = {
                     let user = await userModel.findOne({ username: credentials?.username })
                     if(user){
                         // if user exist check if password match
-                        if(user.password === credentials?.password) return { id: user._id, name: user.username, email: user.email, phone: user.phone}
+                        if(credentials?.password && await matchPassword(credentials?.password, user.password)) return { id: user._id, name: user.username, email: user.email, phone: user.phone}
                         throw new Error("Password does not match, or username already taken")
                     }
                     // if user does not exist register the user

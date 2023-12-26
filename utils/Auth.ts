@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import mongoose from "mongoose";
 import userModel from "./Models/User";
+import bcrypt from "bcrypt";
 
 
 
@@ -33,10 +34,13 @@ export const userExist = async (username: string) => {
     return await userModel.findOne({ username: username });
 }
 
-export const matchPassword = async (password: string, hash : string) => {
-    return password == hash
+export const matchPassword = async (password: string, hash: string) => {
+    console.log("match password", password, hash)
+    return await bcrypt.compare(password, hash);
 }
 
 export const hashPassword = async (password: string) => {
-    return password
+    // use bcrypt to hash password
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
 }
