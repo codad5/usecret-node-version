@@ -17,7 +17,18 @@ export type completeProfileResponseData = {
   email:string,
   phone ?: string
 }
-export type ResponseData = MessageSentResponseData | GetMessagesResponseData | checkUsernameAvailabilityResponseData | completeProfileResponseData;
+
+export type PreConnectWhatsAppResponseData = completeProfileResponseData & {
+  phone: string;
+  email?: string;
+}
+
+export type ConnectWhatsAppResponseData = completeProfileResponseData & {
+  phone: string;
+  connected: boolean;
+}
+
+export type ResponseData = MessageSentResponseData | GetMessagesResponseData | checkUsernameAvailabilityResponseData | completeProfileResponseData | PreConnectWhatsAppResponseData | ConnectWhatsAppResponseData;
 
 export type SuccessResponse<T> = {
   success: true;
