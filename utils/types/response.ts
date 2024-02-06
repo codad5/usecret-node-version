@@ -18,7 +18,8 @@ export type completeProfileResponseData = {
   phone ?: string
 }
 
-export type PreConnectWhatsAppResponseData = completeProfileResponseData & {
+export type PreConnectWhatsAppResponseData =  {
+  username: string;
   phone: string;
   email?: string;
 }
