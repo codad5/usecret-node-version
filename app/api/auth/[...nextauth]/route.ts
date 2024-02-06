@@ -38,7 +38,7 @@ export const authOptions : AuthOptions = {
                     return null
                 }
                 catch(err){
-                    console.log(err);
+                    console.log(err, "error authorizing user")
                     throw new Error((err as Error).message);
                 }
 

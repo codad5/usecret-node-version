@@ -1,15 +1,23 @@
-import * as whatsAppClient from "@green-api/whatsapp-api-client";
+import WhatsApp from 'whatsapp';
 
-const restAPI = whatsAppClient.restAPI({
-  idInstance: process.env.ID_INSTANCE,
-  apiTokenInstance: process.env.API_TOKEN_INSTANCE,
-});
+const FROM_PHONE_NUMBER_ID = '150173314856345'
 
-export const sendWhatsappText = async (phone: string, message: string, quoteId?: string) => {
-  const response = await restAPI.message.sendMessage(
-    `${phone}@c.us`,
-    quoteId,
-    message,
-  );
-  return response;
-};
+const SENDER_NUMBER = 15550837562;
+// const recipient_number = 2348153115864;
+
+
+// Your test sender phone number
+const wa = new WhatsApp(  SENDER_NUMBER  );
+
+// Enter the recipient phone number
+
+export async function send_message(recipient_number: number, message: string) {
+    
+    const sent_text_message = wa.messages.text({ body: message }, recipient_number);
+
+    await sent_text_message.then((res) => {
+        // console.log(res.rawResponse());
+        console.log('Message sent successfully to ' + recipient_number);
+    });
+    return true
+}
