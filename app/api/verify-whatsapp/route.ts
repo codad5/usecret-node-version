@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
         const phone_user = await userModel.findOne<UsersModel>({ phone })
         if (phone_user) throw new Error("Phone number already in use")
         const otp = generateOTP()
-        await redisClient.set(`${phone}|otp`, otp)
+        await redisClient.set(`${phone}|otp`, otp, "EX", 300)
         // let otpHash = await hashPassword(`${phone}|${otp}`)
         // update the above user with the phone number and otp 
         const user = check_user
