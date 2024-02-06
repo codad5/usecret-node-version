@@ -2,7 +2,8 @@ export type UsersModel = {
     username: string;
     password ?: string;
     email ?: string;
-    phone ?: string;
+    phone?: string;
+    otp ?: string;
 }
 
 export type MessageModel = {

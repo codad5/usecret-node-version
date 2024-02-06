@@ -32,7 +32,7 @@ export const POST = async (req: Request) => {
         
         
     } catch (e) {
-        console.log(e)
+        console.log(e, "error completing profile")
         return NextResponse.json<ErrorResponse>({
             message: ("something went wrong"), 
             error: (e as Error).message,

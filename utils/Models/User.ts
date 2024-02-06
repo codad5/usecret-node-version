@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema<UsersModel>({
     password: { type: String, required: false },
     email: { type: String, required: false, unique: true, sparse: true },
     phone: { type: String, required: false, unique: true, sparse: true },
+    otp: { type: String, required: false }
 });
 
 
