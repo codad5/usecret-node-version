@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
         
         
     } catch (e) {
-        console.log(e)
+        console.log(e, "error checking username availability")
         return NextResponse.json<ErrorResponse>({
             message: ("something went wrong"), 
             error: (e as Error).message,

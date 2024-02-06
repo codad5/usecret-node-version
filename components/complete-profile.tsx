@@ -31,7 +31,7 @@ export default function CompleteProfile(){
         e.preventDefault()
         try{
             const {data} = await axios.post<CustomResponse<completeProfileResponseData>>("/api/complete-profile", {
-                username:username
+                username: username
             })
             if(!data.success) throw new Error(`${data.message} -- ${data.error}`)
             setNotification({message:`your username is ${data.data.username}`, type:'success'})
