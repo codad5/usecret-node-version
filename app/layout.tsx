@@ -2,6 +2,7 @@ import Providers from '@/components/Providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { Metadata } from 'next'
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -57,9 +58,10 @@ export default function RootLayout({
         {children}
         <footer className='w-full text-center p-4 h-20'>
             <span>Built by Chibueze</span>
-        </footer>
+          </footer>
       </body>
       </Providers>
+      <Analytics />
     </html>
   )
 }
