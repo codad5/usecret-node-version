@@ -11,8 +11,9 @@ const wa = new WhatsApp(  SENDER_NUMBER  );
 
 // Enter the recipient phone number
 
-export async function send_message(recipient_number: number, message: string) {
-    
+export async function send_message(recipient_number: number|string, message: string) {
+    // make sure recipient number is a valid number of type number 
+    recipient_number = Number(recipient_number);
     const sent_text_message = wa.messages.text({ body: message }, recipient_number);
 
     await sent_text_message.then((res) => {
