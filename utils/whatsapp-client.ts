@@ -1,13 +1,10 @@
 import WhatsApp from 'whatsapp';
 
-const FROM_PHONE_NUMBER_ID = '150173314856345'
-
-const SENDER_NUMBER = 15550837562;
-// const recipient_number = 2348153115864;
+const {WA_PHONE_NUMBER_ID} = process.env;
 
 
 // Your test sender phone number
-const wa = new WhatsApp(  SENDER_NUMBER  );
+const wa = new WhatsApp( parseInt(WA_PHONE_NUMBER_ID ?? '') );
 
 // Enter the recipient phone number
 
@@ -22,3 +19,4 @@ export async function send_message(recipient_number: number|string, message: str
     });
     return true
 }
+
