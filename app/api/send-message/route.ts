@@ -4,6 +4,7 @@ import { CustomResponse, ErrorResponse, MessageSentResponseData } from "@/utils/
 import { send_message } from "@/utils/whatsapp-client"
 import { NextResponse } from "next/server"
 import userModel from "@/utils/Models/User";
+import { get_whatsapp_secret_message_text } from "@/utils/helpers"
 
 export const POST = async (req: Request) => {
     try {
@@ -17,7 +18,7 @@ export const POST = async (req: Request) => {
             message: data.message,
         }).save()
         if (check_user.phone) {
-            const sent_message = await send_message(check_user.phone, data.message)
+            const sent_message = await send_message(check_user.phone, get_whatsapp_secret_message_text(data.message, check_user.username))
             if (!sent_message) console.log("Error sending message")
             console.log("sent message")
         }
