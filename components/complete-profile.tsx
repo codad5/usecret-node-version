@@ -48,7 +48,7 @@ export default function CompleteProfile(){
             <Notification {...notification} />
             <form className="flex flex-col items-center justify-center w-full h-full" onSubmit={submitForm}>
                 <label className="text-xl font-bold text-center">Enter your Username</label>
-                <input className="w-3/4 p-2 m-2 text-xl border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-black" type="text" placeholder="Your name" onInput={checkUserName} />
+                <input className="w-3/4 p-2 m-2 text-xl border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-white" type="text" placeholder="Your name" onInput={checkUserName} />
                 <div className="text-white">
                     {available === null ? <>
                         <p className="text-xl font-bold text-center text-gray-600">Checking username availability</p>
