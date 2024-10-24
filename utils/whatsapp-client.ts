@@ -15,7 +15,7 @@ export async function send_message(recipient_number: number|string, message: str
         body: message, 
         preview_url: true
      }, recipient_number);
-    console.log(sent_text_message.responseBodyToJSON());
+    console.log(await sent_text_message.responseBodyToJSON());
     console.log(`Message sent to ${recipient_number}`);
     return true
 }
