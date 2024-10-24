@@ -11,5 +11,5 @@ export const get_whatsapp_secret_message_text = (message: string, user: string) 
 
 > ${message}
 
-    Unlock more at https://usecret.xyz 🔑`
+Unlock more at https://usecret.xyz 🔑`
 }
