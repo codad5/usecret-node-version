@@ -10,10 +10,12 @@ const wa = new WhatsApp( parseInt(WA_PHONE_NUMBER_ID ?? '') );
 
 export async function send_message(recipient_number: number|string, message: string) {
     // make sure recipient number is a valid number of type number 
+    console.log(`About to send message to ${recipient_number}`);
     recipient_number = Number(recipient_number);
     const sent_text_message = await wa.messages.text({
         body: message, 
-        preview_url: true
+        preview_url: true, 
+
      }, recipient_number);
     console.log(await sent_text_message.responseBodyToJSON());
     console.log(`Message sent to ${recipient_number}`);
